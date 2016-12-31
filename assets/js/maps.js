@@ -10,15 +10,17 @@ function baseMap(){
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
 	// generate coordinate by draggable
-	tanda = new google.maps.Marker({
+	marker = new google.maps.Marker({
 		position: location,
 		map: maps,
 		icon: markerImage,
 		draggable : true
 	});
 	// set coordinate to textfield
-	google.maps.event.addListener(tanda, "dragend", function(event) {
-		document.getElementById("#latitude").value = this.getPosition().lat();
-		document.getElementById("#longitude").value = this.getPosition().lng();
+	google.maps.event.addListener(marker, "dragend", function(event) {
+		document.getElementById("latitude1").value = this.getPosition().lat();
+		document.getElementById("longitude1").value = this.getPosition().lng();
+		document.getElementById("latitude2").value = this.getPosition().lat();
+		document.getElementById("longitude2").value = this.getPosition().lng();
 	});
 }

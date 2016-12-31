@@ -1,4 +1,24 @@
-<?php require_once("config.php"); ?>
+<?php require_once("config.php");
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
+    $sql = "SELECT * FROM pemilik WHERE username='$_POST[username]' AND password='".md5($_POST["password"])."'";
+    if ($query = $connection->query($sql)) {
+        if ($query->num_rows) {
+            while ($data = $query->fetch_array()) {
+              $_SESSION["as"] = "pemilik";
+              $_SESSION["id"] = $data["id_pemilik"];
+              $_SESSION["nama"] = $data["nama"];
+              $_SESSION["username"] = $data["username"];
+            }
+            header('location: ?page=home');
+        } else {
+            echo alert("Username / Password tidak sesuai!", "index.php");
+        }
+    } else {
+        echo "Query error!";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,24 +46,34 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">eKost Yogyakarta</a>
+        <a class="navbar-brand" href="index.php" style="color: white;">eKost Yogyakarta</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right">
-          <?php if (empty($_SESSION)): ?>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="username">
-            <span class="input-group-addon" style="border-left: 0; border-right: 0;"></span>
-            <input type="password" class="form-control" placeholder="password" />
-            <span class="input-group-btn">
-              <button class="btn btn-success" type="button">Login</button>
-              <a href="?page=daftar" class="btn btn-primary">Register</a>
-            </span>
-          </div>
+        <?php if (empty($_SESSION)): ?>
+          <form class="navbar-form navbar-right" action="<?=$_SERVER["REQUEST_URI"]?>" method="post">
+              <div class="input-group">
+                <input type="text" name="username" class="form-control" placeholder="username">
+                <span class="input-group-addon" style="border-left: 0; border-right: 0;"></span>
+                <input type="password" name="password" class="form-control" placeholder="password">
+                <span class="input-group-btn">
+                  <button class="btn btn-success" type="submit">Login</button>
+                  <a href="?page=pemilik" class="btn btn-primary">Register</a>
+                </span>
+              </div>
+              <input type="hidden" name="login" value="true">
+          </form>
         <?php else: ?>
-          <a href="logout.php" class="btn btn-default">Logout</a>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION["nama"]?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="?page=pemilik">Profil</a></li>
+                <li><a href="?page=kost">Daftar Kost</a></li>
+              </ul>
+            </li>
+            <li><a href="logout.php">Logout</a></li>
+          </ul>
         <?php endif; ?>
-        </form>
       </div><!--/.navbar-collapse -->
     </div>
   </nav>
