@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
         <a class="navbar-brand" href="index.php" style="color: white;">eKost Yogyakarta</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <?php if (!isset($_SESSION)): ?>
+        <?php if (empty($_SESSION)): ?>
           <form class="navbar-form navbar-right" action="<?=$_SERVER["REQUEST_URI"]?>" method="post">
               <div class="input-group">
                 <input type="text" name="username" class="form-control" placeholder="username">
