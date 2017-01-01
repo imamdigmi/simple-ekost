@@ -1,8 +1,7 @@
 <?php
-$update = (isset($_GET['action']) AND $_GET['action'] == 'update' OR isset($_SESSION["as"]) == "pemilik") ? true : false;
+$update = (isset($_GET['action']) AND $_GET['action'] == 'update') ? true : false;
 if ($update) {
-	$id = (isset($_SESSION)) ? $_GET["key"] : $_SESSION["id"];
-	$sql = $connection->query("SELECT * FROM pemilik WHERE id_pemilik='$id'");
+	$sql = $connection->query("SELECT * FROM pemilik WHERE id_pemilik='$_GET[key]'");
 	$row = $sql->fetch_assoc();
 }
 
@@ -13,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$sql = "INSERT INTO pemilik VALUES (NULL, '$_POST[nama]', '$_POST[alamat]', '$_POST[telepon]', '$_POST[email]', '$_POST[username]', '".md5($_POST["password"])."')";
 	}
   if ($connection->query($sql)) {
-    echo alert("Berhasil! Silahkan login", "?page=home");
+    echo alert("Berhasil!", "?page=pemilik");
   } else {
 		echo alert("Gagal!", "?page=pemilik");
   }
@@ -26,60 +25,48 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 ?>
 <div class="container">
 	<div class="page-header">
-		<?php if ($update): ?>
-			<h2>Update <small>data pemilik kost!</small></h2>
-		<?php else: ?>
-			<h2>Daftar <small>sebegai pemilik kost!</small></h2>
-		<?php endif; ?>
+		<h2>Daftar <small>pemilik kost!</small></h2>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="panel panel-info">
-				<div class="panel-heading"><h3 class="text-center">DAFTAR</h3></div>
+	    <div class="panel panel-<?= ($update) ? "warning" : "info" ?>">
+	      <div class="panel-heading"><h3 class="text-center"><?= ($update) ? "EDIT" : "TAMBAH" ?></h3></div>
 				<div class="panel-body">
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
-			<div class="form-group">
-				<label for="nama">Nama</label>
-				<input type="text" name="nama" class="form-control" autofocus="on" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
-			</div>
-			<div class="form-group">
-				<label for="alamat">Alamat</label>
-				<textarea rows="2" name="alamat" class="form-control"><?= (!$update) ? "" : $row["alamat"] ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="telepon">No Telp</label>
-				<input type="text" name="telepon" class="form-control" <?= (!$update) ?: 'value="'.$row["telepon"].'"' ?>>
-			</div>
-			<div class="form-group">
-				<label for="email">email</label>
-				<input type="email" name="email" class="form-control" <?= (!$update) ?: 'value="'.$row["email"].'"' ?>>
-			</div>
-			<div class="form-group">
-				<label for="username">Username</label>
-				<input type="text" name="username" class="form-control" <?= (!$update) ?: 'value="'.$row["username"].'"' ?>>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" class="form-control">
-			</div>
-			<?php if ($update): ?>
-				<div class="row">
-						<div class="col-md-10">
-							<button type="submit" class="btn btn-warning btn-block">Update</button>
+						<div class="form-group">
+							<label for="nama">Nama</label>
+							<input type="text" name="nama" class="form-control" autofocus="on" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
 						</div>
-						<div class="col-md-2">
-							<a href="?page=kriteria" class="btn btn-default btn-block">Batal</a>
+						<div class="form-group">
+							<label for="alamat">Alamat</label>
+							<textarea rows="2" name="alamat" class="form-control"><?= (!$update) ? "" : $row["alamat"] ?></textarea>
 						</div>
-				</div>
-			<?php else: ?>
-				<button type="submit" class="btn btn-primary btn-block">Register</button>
-			<?php endif; ?>
+						<div class="form-group">
+							<label for="telepon">No Telp</label>
+							<input type="text" name="telepon" class="form-control" <?= (!$update) ?: 'value="'.$row["telepon"].'"' ?>>
+						</div>
+						<div class="form-group">
+							<label for="email">email</label>
+							<input type="email" name="email" class="form-control" <?= (!$update) ?: 'value="'.$row["email"].'"' ?>>
+						</div>
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" name="username" class="form-control" <?= (!$update) ?: 'value="'.$row["username"].'"' ?>>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" name="password" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block"><?= ($update) ? "Ubah" : "Tambah" ?></button>
+						<?php if ($update): ?>
+							<button type="reset" class="btn btn-primary btn-block">Batal</button>
+						<?php endif; ?>
+					</form>
 				</div>
 			</div>
-		</form>
 		</div>
 		<div class="col-md-8">
-			<div class="panel panel-info">
+				<div class="panel panel-info">
 					<div class="panel-heading"><h3 class="text-center">DAFTAR</h3></div>
 					<div class="panel-body">
 							<table class="table table-condensed">
@@ -106,7 +93,10 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 															<td><?=$row['telepon']?></td>
 															<td><?=$row['username']?></td>
 															<td>
-																<a href="?page=pemilik&action=detail&key=<?=$row['id_pemilik']?>" class="btn btn-info btn-xs">Detail</a>
+																<div class="btn-group">
+																	<a href="?page=pemilik&action=update&key=<?=$row['id_pemilik']?>" class="btn btn-warning btn-xs">Ubah</a>
+																	<a href="?page=pemilik&action=delete&key=<?=$row['id_pemilik']?>" class="btn btn-danger btn-xs">Hapus</a>
+																</div>
 															</td>
 													</tr>
 													<?php endwhile ?>
