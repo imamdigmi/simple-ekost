@@ -40,7 +40,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 				</div>
 				<div class="form-group">
 					<label for="alamat">Alamat</label>
-					<textarea rows="2" name="alamat" class="form-control"><?= (!$update) ?: $row["alamat"] ?></textarea>
+					<textarea rows="2" name="alamat" class="form-control"><?= (!$update) ? "" : $row["alamat"] ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="telepon">No Telp</label>

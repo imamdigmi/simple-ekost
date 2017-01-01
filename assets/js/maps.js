@@ -1,5 +1,4 @@
 var maps;
-var markerImage = 'assets/img/marker.png';
 
 function baseMap(){
 	// default position

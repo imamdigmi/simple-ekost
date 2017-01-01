@@ -1,6 +1,4 @@
-<?php if (!isset($_SESSION["admin"])): ?>
-	<div id="map_canvas" style="width:100%; height:500px"></div>
-<?php endif; ?>
+<div id="map_canvas" style="width:100%; height:500px"></div>
 <div class="container">
 	<h2>Cari kost!</h2>
 	<!-- search -->

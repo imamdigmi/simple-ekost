@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
         <a class="navbar-brand" href="index.php" style="color: white;">eKost Yogyakarta</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <?php if (empty($_SESSION)): ?>
+        <?php if (!isset($_SESSION)): ?>
           <form class="navbar-form navbar-right" action="<?=$_SERVER["REQUEST_URI"]?>" method="post">
               <div class="input-group">
                 <input type="text" name="username" class="form-control" placeholder="username">
@@ -88,5 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
   <script src="assets/js/maps.js"></script>
+  <script type="text/javascript">
+    var markerImage = 'assets/img/marker.png';
+  </script>
 </body>
 </html>

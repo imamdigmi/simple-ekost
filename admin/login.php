@@ -1,12 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once "config.php";
-    $sql = "SELECT * FROM pengguna WHERE username='$_POST[username]' AND password='" . md5($_POST['password']) . "'";
+    require_once "../config.php";
+    $sql = "SELECT * FROM admin WHERE username='$_POST[username]' AND password='" . md5($_POST['password']) . "'";
     if ($query = $connection->query($sql)) {
         if ($query->num_rows) {
             session_start();
             while ($data = $query->fetch_array()) {
-                $_SESSION["as"] = $data["status"];
                 $_SESSION["username"] = $data["username"];
               }
             header('location: index.php');
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>e kost</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <style>
         body {
             margin-top: 40px;
