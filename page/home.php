@@ -1,4 +1,4 @@
-<div id="map_canvas" style="width:100%; height:500px"></div>
+<div id="map" style="width:100%; height:500px"></div>
 <div class="container">
 	<h2>Cari kost!</h2>
 	<!-- search -->
@@ -54,7 +54,7 @@
 							<td>Rp.<?=$row["harga_3bulan"]?>,-</td>
 							<td>Rp.<?=$row["harga_6bulan"]?>,-</td>
 							<td>Rp.<?=$row["harga_pertahun"]?>,-</td>
-							<td><span class="label label-success"><?=$row["status"]?></span></td>
+							<td><span class="label label-<?=($row["status"] == "Perempuan") ? "info" : "primary"?>"><?=$row["status"]?></span></td>
 							<td><?=$row["tersedia"]?></td>
 						</tr>
 					<?php endwhile; ?>
