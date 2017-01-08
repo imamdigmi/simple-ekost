@@ -124,7 +124,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		                            <td><?=$no++?></td>
 		                            <td><?=$row['nama']?></td>
 		                            <td><?=$row['judul']?></td>
-		                            <td><a href="?file=<?=$row['file']?>" class="btn btn-info btn-xs">Lihat</a></td>
+		                            <td><a href="assets/img/kost/<?=$row['file']?>" class="btn btn-info btn-xs fancybox">Lihat</a></td>
 		                            <td>
 		                                <div class="btn-group">
 		                                    <a href="?page=galeri&action=update&key=<?=$row['id_galeri']?>" class="btn btn-warning btn-xs">Edit</a>
@@ -141,3 +141,32 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".fancybox").fancybox({
+openEffect  : 'none',
+closeEffect : 'none',
+iframe : {
+preload: false
+}
+});
+$(".various").fancybox({
+maxWidth    : 800,
+maxHeight    : 600,
+fitToView    : false,
+width        : '70%',
+height        : '70%',
+autoSize    : false,
+closeClick    : false,
+openEffect    : 'none',
+closeEffect    : 'none'
+});
+$('.fancybox-media').fancybox({
+openEffect  : 'none',
+closeEffect : 'none',
+helpers : {
+media : {}
+}
+});
+});
+</script>
