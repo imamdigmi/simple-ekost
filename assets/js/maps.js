@@ -23,6 +23,7 @@ function initialize() {
 		var xml = data.responseXML;
 		var markers = xml.documentElement.getElementsByTagName('marker');
 		Array.prototype.forEach.call(markers, function(markerElem) {
+		  var id = markerElem.getAttribute("id");
 		  var nama = markerElem.getAttribute("nama");
 		  var alamat = markerElem.getAttribute("alamat");
 		  var latitude = markerElem.getAttribute("latitude");
@@ -41,13 +42,44 @@ function initialize() {
 				parseFloat(markerElem.getAttribute('longitude'))
 			);
 
+			// Info Nama Kost
 			strong.textContent = nama
 			infowincontent.appendChild(strong);
 			infowincontent.appendChild(document.createElement('br'));
 
+			// Info Kamar tersedia
 			var text = document.createElement('text');
-			text.textContent = alamat+", "+tersedia+" kamar tersedia, Rp."+harga_3bulan+",-/3bln Rp."+harga_6bulan+",-/6bln Rp."+harga_pertahun+",-/pertahun"
+			text.textContent = "Kamar tersedia : "+tersedia;
 			infowincontent.appendChild(text);
+			infowincontent.appendChild(document.createElement('br'));
+
+			// Info harga 3 bulan
+			var harga3bulan = document.createElement('text');
+			harga3bulan.textContent = "Harga 3 Bulan : Rp."+harga_3bulan+",-";
+			infowincontent.appendChild(harga3bulan);
+			infowincontent.appendChild(document.createElement('br'));
+
+			// Info harga 6 bulan
+			var harga6bulan = document.createElement('text');
+			harga6bulan.textContent = "Harga 6 Bulan : Rp."+harga_6bulan+",-";
+			infowincontent.appendChild(harga6bulan);
+			infowincontent.appendChild(document.createElement('br'));
+
+			// Info harga pertahun
+			var hargapertahun = document.createElement('text');
+			hargapertahun.textContent = "Harga pertahun : Rp."+harga_pertahun+",-";
+			infowincontent.appendChild(hargapertahun);
+			infowincontent.appendChild(document.createElement('br'));
+			infowincontent.appendChild(document.createElement('br'));
+
+
+			var a = document.createElement('a');
+			a.appendChild(document.createTextNode("Lihat Detail"));
+			a.title = nama;
+			a.class = "btn btn-info btn-xs";
+			a.href = "?page=detail&key="+id;
+			infowincontent.appendChild(a);
+
 			var marker = new google.maps.Marker({
 				map: map,
 				icon: markerImage,

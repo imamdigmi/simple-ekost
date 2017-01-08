@@ -25,6 +25,7 @@ while ($row = $query->fetch_assoc()){
   // Add to XML document node
   $node = $dom->createElement("marker");
   $newnode = $parnode->appendChild($node);
+  $newnode->setAttribute("id",$row['id_kost']);
   $newnode->setAttribute("nama",$row['nama']);
   $newnode->setAttribute("alamat", $row['alamat']);
   $newnode->setAttribute("latitude", $row['latitude']);
