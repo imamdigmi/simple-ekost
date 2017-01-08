@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION["is_logged"])) {
+	echo alert("Harus login dulu!", "?page=home");
+}
 $update = (isset($_GET['action']) AND $_GET['action'] == 'update') ? true : false;
 if ($update) {
 	$sql = $connection->query("SELECT * FROM kost WHERE id_kost='$_GET[key]'");
@@ -112,7 +115,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		                </thead>
 		                <tbody>
 		                    <?php $no = 1; ?>
-		                    <?php if ($query = $connection->query("SELECT * FROM kost")): ?>
+		                    <?php if ($query = $connection->query("SELECT * FROM kost WHERE id_pemilik=$_SESSION[id]")): ?>
 		                        <?php while($row = $query->fetch_assoc()): ?>
 		                        <tr>
 		                            <td><?=$no++?></td>

@@ -5,12 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
     if ($query = $connection->query($sql)) {
         if ($query->num_rows) {
             while ($data = $query->fetch_array()) {
-              $_SESSION["as"] = "pemilik";
+              $_SESSION["is_logged"] = true;
               $_SESSION["id"] = $data["id_pemilik"];
               $_SESSION["nama"] = $data["nama"];
               $_SESSION["username"] = $data["username"];
             }
-            header('location: ?page=home');
+            header('location: ?page=kost');
         } else {
             echo alert("Username / Password tidak sesuai!", "index.php");
         }
@@ -51,10 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
         <a class="navbar-brand" href="index.php" style="color: white;">eKost Yogyakarta</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <?php if (isset($_SESSION)): ?>
+        <?php if (isset($_SESSION['is_logged'])): ?>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=isset($_SESSION["nama"])?> <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION["nama"]?> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="?page=pemilik">Profil</a></li>
                 <li><a href="?page=kost">Daftar Kost</a></li>

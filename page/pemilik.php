@@ -1,5 +1,5 @@
 <?php
-$update = (isset($_GET['action']) AND $_GET['action'] == 'update' OR isset($_SESSION["as"]) == "pemilik") ? true : false;
+$update = ((isset($_GET['action']) AND $_GET['action'] == 'update') OR $_SESSION["is_logged"]) ? true : false;
 if ($update) {
 	$sql = $connection->query("SELECT * FROM pemilik WHERE id_pemilik='$_SESSION[id]'");
 	$row = $sql->fetch_assoc();
