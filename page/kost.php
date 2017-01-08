@@ -2,6 +2,7 @@
 if (!isset($_SESSION["is_logged"])) {
 	echo alert("Harus login dulu!", "?page=home");
 }
+
 $update = (isset($_GET['action']) AND $_GET['action'] == 'update') ? true : false;
 if ($update) {
 	$sql = $connection->query("SELECT * FROM kost WHERE id_kost='$_GET[key]'");

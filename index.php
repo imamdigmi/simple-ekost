@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
               <ul class="dropdown-menu">
                 <li><a href="?page=pemilik">Profil</a></li>
                 <li><a href="?page=kost">Daftar Kost</a></li>
+                <li><a href="?page=galeri">Galeri</a></li>
               </ul>
             </li>
             <li><a href="logout.php">Logout</a></li>

@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION["is_logged"])) {
+	echo alert("Harus login dulu!", "?page=home");
+}
+
 $update = ((isset($_GET['action']) AND $_GET['action'] == 'update') OR $_SESSION["is_logged"]) ? true : false;
 if ($update) {
 	$sql = $connection->query("SELECT * FROM pemilik WHERE id_pemilik='$_SESSION[id]'");
