@@ -8,7 +8,12 @@ $node = $dom->createElement("markers");
 $parnode = $dom->appendChild($node);
 
 // Select all the rows in the markers table
-if (!$query = $connection->query("SELECT * FROM kost")) {
+if (isset($_POST["status"])) {
+  $sql = "SELECT * FROM kost WHERE status='$_POST[status]' AND nama LIKE '%$_POST[nama]%' AND harga_3bulan >= $_POST[min] AND harga_3bulan <= $_POST[max]";
+} else {
+  $sql = "SELECT * FROM kost";
+}
+if (!$query = $connection->query($sql)) {
   die('Invalid query: ' . $connection->error);
 }
 

@@ -29,7 +29,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div id="map_canvas" style="width:100%; height:300px"></div>
+			<div id="map" style="width:100%; height:300px"></div>
 		</div>
 	</div>
 	<hr>

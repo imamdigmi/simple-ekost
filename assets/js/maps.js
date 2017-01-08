@@ -40,13 +40,23 @@ function initialize() {
 			infowincontent.appendChild(document.createElement('br'));
 
 			var text = document.createElement('text');
-			text.textContent = alamat + ", " + tersedia + " kamar tersedia, Rp." + harga_3bulan + ",-/3bln"
+			text.textContent = alamat+", "+tersedia+" kamar tersedia, Rp."+harga_3bulan+",-/3bln Rp."+harga_6bulan+",-/6bln Rp."+harga_pertahun+",-/pertahun"
 			infowincontent.appendChild(text);
 			var marker = new google.maps.Marker({
 				map: map,
 				icon: markerImage,
-				position: point
+				position: point,
+				draggable : true
 			});
+
+			// set coordinate to textfield
+			google.maps.event.addListener(marker, "dragend", function(event) {
+				document.getElementById("latitude1").value = this.getPosition().lat();
+				document.getElementById("longitude1").value = this.getPosition().lng();
+				document.getElementById("latitude2").value = this.getPosition().lat();
+				document.getElementById("longitude2").value = this.getPosition().lng();
+			});
+
 			marker.addListener('click', function() {
 				infoWindow.setContent(infowincontent);
 				infoWindow.open(map, marker);

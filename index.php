@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <link href="assets/css/jumbotron.css" rel="stylesheet">
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_2mV5EiGV6fw_mIPg7H885e1eocyaAxc&callback=initMap"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/maps.js"></script>
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -49,7 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
         <a class="navbar-brand" href="index.php" style="color: white;">eKost Yogyakarta</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <?php if (empty($_SESSION)): ?>
+        <?php if (isset($_SESSION)): ?>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=isset($_SESSION["nama"])?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="?page=pemilik">Profil</a></li>
+                <li><a href="?page=kost">Daftar Kost</a></li>
+              </ul>
+            </li>
+            <li><a href="logout.php">Logout</a></li>
+          </ul>
+        <?php else: ?>
           <form class="navbar-form navbar-right" action="<?=$_SERVER["REQUEST_URI"]?>" method="post">
               <div class="input-group">
                 <input type="text" name="username" class="form-control" placeholder="username">
@@ -62,17 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
               </div>
               <input type="hidden" name="login" value="true">
           </form>
-        <?php else: ?>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION["nama"]?> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="?page=pemilik">Profil</a></li>
-                <li><a href="?page=kost">Daftar Kost</a></li>
-              </ul>
-            </li>
-            <li><a href="logout.php">Logout</a></li>
-          </ul>
         <?php endif; ?>
       </div><!--/.navbar-collapse -->
     </div>
@@ -84,10 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
       <p>&copy; 2016 eKost, Inc.</p>
     </footer>
   </div> <!-- /container -->
-  <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-  <script src="assets/js/maps.js"></script>
   <script type="text/javascript">
     var markerImage = 'assets/img/marker.png';
   </script>
