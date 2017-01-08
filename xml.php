@@ -7,12 +7,13 @@ $dom = new DOMDocument("1.0");
 $node = $dom->createElement("markers");
 $parnode = $dom->appendChild($node);
 
-// Select all the rows in the markers table
-if (isset($_POST["status"])) {
-  $sql = "SELECT * FROM kost WHERE status='$_POST[status]' AND nama LIKE '%$_POST[nama]%' AND harga_3bulan >= $_POST[min] AND harga_3bulan <= $_POST[max]";
-} else {
-  $sql = "SELECT * FROM kost";
+$sql = "SELECT * FROM kost";
+if ($_GET["searched"] == "true") {
+  $sql .= " WHERE status='$_GET[status]' AND nama LIKE '%$_GET[nama]%' AND harga_3bulan >= $_GET[min] AND harga_3bulan <= $_GET[max]";
+} elseif ($_GET["searched"] == "false") {
+  $sql .= "";
 }
+
 if (!$query = $connection->query($sql)) {
   die('Invalid query: ' . $connection->error);
 }

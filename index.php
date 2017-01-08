@@ -26,13 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eKost</title>
+  <script type="text/javascript">
+    var IsDraggable, searched = <?=(isset($_GET["page"])) ? (($_GET["page"] == "home") ? "false" : "true") : "false"?>
+  </script>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
   <link href="assets/css/jumbotron.css" rel="stylesheet">
   <script src="assets/js/ie-emulation-modes-warning.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_2mV5EiGV6fw_mIPg7H885e1eocyaAxc&callback=initMap"></script>
   <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/maps.js"></script>
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -91,5 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <script type="text/javascript">
     var markerImage = 'assets/img/marker.png';
   </script>
+  <script src="assets/js/maps.js"></script>
 </body>
 </html>

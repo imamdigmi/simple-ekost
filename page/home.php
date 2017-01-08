@@ -3,29 +3,32 @@
 	<h2>Cari kost!</h2>
 	<!-- search -->
 	<div class="row">
-		<div class="col-md-5">
-			<label for="nama" class="control-label">Nama</label>
-			<input type="text" name="nama" id="nama" class="form-control">
-		</div>
-		<div class="col-md-3">
-			<label for="status" class="control-label">Status</label>
-			<select class="form-control" name="status" id="status">
-				<option value="Laki-laki">Laki-laki</option>
-				<option value="Perempuan">Perempuan</option>
-			</select>
-		</div>
-		<div class="col-md-4">
-			<label for="">Harga</label>
-			<div class="input-group">
-				<span class="input-group-addon" style="border-right: 0;">Min</span>
-				<input type="number" name="min" id="min" class="form-control" value="0">
-				<span class="input-group-addon" style="border-left: 0; border-right: 0;">Max</span>
-				<input type="number" name="max" id="max" class="form-control" value="0">
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-primary" id="submit">Cari...</button>
-				</span>
-			</div>
-		</div>
+		<form action="<?=$_SERVER["REQUEST_URI"]?>">
+				<input type="hidden" name="searched" value="true">
+				<div class="col-md-5">
+					<label for="nama" class="control-label">Nama</label>
+					<input type="text" name="nama" id="nama" class="form-control">
+				</div>
+				<div class="col-md-3">
+					<label for="status" class="control-label">Status</label>
+					<select class="form-control" name="status" id="status">
+						<option value="Laki-laki">Laki-laki</option>
+						<option value="Perempuan">Perempuan</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label for="">Harga</label>
+					<div class="input-group">
+						<span class="input-group-addon" style="border-right: 0;">Min</span>
+						<input type="number" name="min" id="min" class="form-control" value="0">
+						<span class="input-group-addon" style="border-left: 0; border-right: 0;">Max</span>
+						<input type="number" name="max" id="max" class="form-control" value="0">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary" id="submit">Cari...</button>
+						</span>
+					</div>
+				</div>
+		</form>
 	</div>
 	<hr>
 	<!-- /search -->
@@ -68,22 +71,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$("#submit").on("click", function (event) {
-		event.preventDefault();
-
-		var nama = $("#nama").val();
-		var min = $("#min").val();
-		var max = $("#max").val();
-		var status = $('select[name=status]').val();
-		$.ajax({
-			type: "POST",
-			url: "xml.php",
-			data: {"nama": nama, "status": status, "min": min, "max": max},
-		}).done(function (response, textStatus, jqXHR){
-			console.log("Searched: "+nama+" "+min+" "+max+" "+status);
-    });
-
-	});
-</script>

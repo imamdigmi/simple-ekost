@@ -13,7 +13,13 @@ function initialize() {
 	}
 
 	// Change this depending on the name of your PHP or XML file
-	downloadUrl('xml.php', function(data) {
+	var searched = (getUrlVars()["searched"] == "true") ? "true" : "false";
+	var nama = getUrlVars()["nama"];
+	var status = getUrlVars()["status"];
+	var min = getUrlVars()["min"];
+	var max = getUrlVars()["max"];
+	var url = "xml.php?searched="+searched+"&nama="+nama+"&status="+status+"&min="+min+"&max="+max;
+	downloadUrl(url, function(data) {
 		var xml = data.responseXML;
 		var markers = xml.documentElement.getElementsByTagName('marker');
 		Array.prototype.forEach.call(markers, function(markerElem) {
@@ -46,7 +52,7 @@ function initialize() {
 				map: map,
 				icon: markerImage,
 				position: point,
-				draggable : true
+				draggable : IsDraggable
 			});
 
 			// set coordinate to textfield
@@ -82,3 +88,17 @@ function downloadUrl(url, callback) {
 }
 
 function doNothing() {}
+
+// Read a page's GET URL variables and return them as an associative array.
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
