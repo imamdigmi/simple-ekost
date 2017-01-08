@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 03, 2017 at 12:23 AM
+-- Generation Time: Jan 09, 2017 at 02:24 AM
 -- Server version: 5.7.16-0ubuntu0.16.10.1
 -- PHP Version: 7.0.13-0ubuntu0.16.10.1
 
@@ -44,6 +44,19 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `galeri`
+--
+
+CREATE TABLE `galeri` (
+  `id_galeri` int(11) NOT NULL,
+  `id_kost` int(11) NOT NULL,
+  `judul` varchar(40) NOT NULL,
+  `file` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kost`
 --
 
@@ -74,7 +87,8 @@ INSERT INTO `kost` (`id_kost`, `id_pemilik`, `nama`, `alamat`, `latitude`, `long
 (5, 1, 'Kost Putri Malu', 'Karangbendo Lor, Banguntapan RT.09 RW.08', -7.78901, 110.407, 12, 'Laki-laki', 'Kasur, Bantal', 20000, 80000, 1000000),
 (6, 2, 'Kontrakan Azizah', 'Karangbendo Kulon, Banguntapan RT.04 RW.08', -7.79163, 110.404, 3, 'Perempuan', 'AC, Lemari, Kasur', 60000, 120000, 1000000),
 (7, 2, 'Kost Putra Pleangi', 'Karangbendo Wetan, Banguntapan RT.03 RW.10', -7.79206, 110.404, 5, 'Laki-laki', 'AC, Lemari, Kasur, Kamar mandi dalam', 75000, 800000, 800000),
-(8, 1, 'Kontrakan Indah', 'Karangbendo kidul, Banguntapan RT.14 RW.3', -7.78994, 110.407, 11, 'Perempuan', 'Kamar mandi dalam, Lemari, Kasur, Kipas, Bantal', 120000, 8000000, 90000000);
+(8, 1, 'Kontrakan Indah', 'Karangbendo kidul, Banguntapan RT.14 RW.3', -7.78994, 110.407, 11, 'Perempuan', 'Kamar mandi dalam, Lemari, Kasur, Kipas, Bantal', 120000, 8000000, 90000000),
+(9, 1, 'kost apa', 'Jogja', -7.79404, 110.409, 4, 'Perempuan', 'kamar', 30000, 40000, 12000);
 
 -- --------------------------------------------------------
 
@@ -111,6 +125,13 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
+-- Indexes for table `galeri`
+--
+ALTER TABLE `galeri`
+  ADD PRIMARY KEY (`id_galeri`),
+  ADD KEY `fk_kost` (`id_kost`);
+
+--
 -- Indexes for table `kost`
 --
 ALTER TABLE `kost`
@@ -133,10 +154,15 @@ ALTER TABLE `pemilik`
 ALTER TABLE `admin`
   MODIFY `id_admin` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `galeri`
+--
+ALTER TABLE `galeri`
+  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `kost`
 --
 ALTER TABLE `kost`
-  MODIFY `id_kost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_kost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `pemilik`
 --
@@ -145,6 +171,12 @@ ALTER TABLE `pemilik`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `galeri`
+--
+ALTER TABLE `galeri`
+  ADD CONSTRAINT `galeri_ibfk_1` FOREIGN KEY (`id_kost`) REFERENCES `kost` (`id_kost`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kost`
