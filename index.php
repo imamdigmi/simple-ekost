@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eKost</title>
   <script type="text/javascript">
-    var IsDraggable, searched = <?=(isset($_GET["page"])) ? (($_GET["page"] == "home") ? "false" : "true") : "false"?>
+    var IsDraggable = <?=$is=(isset($_GET["page"])) ? (($_GET["page"] == "home") ? "false" : "true") : "false"?>;
   </script>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
