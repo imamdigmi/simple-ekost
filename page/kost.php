@@ -111,6 +111,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		                        <th>Harga/3bln</th>
 		                        <th>Harga/6bln</th>
 		                        <th>Harga Pertahun</th>
+		                        <th>Alamat</th>
 		                        <th></th>
 		                    </tr>
 		                </thead>
@@ -125,6 +126,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		                            <td><?=$row['harga_3bulan']?></td>
 		                            <td><?=$row['harga_6bulan']?></td>
 		                            <td><?=$row['harga_pertahun']?></td>
+		                            <td><?=$row['alamat']?></td>
 		                            <td>
 		                                <div class="btn-group">
 		                                    <a href="?page=kost&action=update&key=<?=$row['id_kost']?>" class="btn btn-warning btn-xs">Edit</a>

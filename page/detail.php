@@ -74,7 +74,7 @@
 	</div>
 
 	<div class="row">
-		<?php $query = $connection->query("SELECT judul, file FROM galeri WHERE id_kost=$_GET[key]"); while ($row = $query->fetch_assoc()): ?>
+		<?php $query = $connection->query("SELECT judul, file FROM galeri WHERE id_kost=$_GET[key]"); while ($row = @$query->fetch_assoc()): ?>
 			<div class="col-xs-6 col-md-3">
 		    <a href="assets/img/kost/<?=$row['file']?>" class="thumbnail fancybox">
 		      <img src="assets/img/kost/<?=$row['file']?>" alt="<?=$row['judul']?>">
