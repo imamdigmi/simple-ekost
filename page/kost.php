@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($update) {
 		$sql = "UPDATE kost SET id_pemilik='$_POST[id_pemilik]', nama='$_POST[nama]', alamat='$_POST[alamat]', latitude='$_POST[latitude]', longitude='$_POST[longitude]', tersedia='$_POST[tersedia]', status='$_POST[status]', fasilitas='$_POST[fasilitas]', harga_3bulan='$_POST[harga_3bulan]', harga_6bulan='$_POST[harga_6bulan]', harga_pertahun='$_POST[harga_pertahun]' WHERE id_kost='$_GET[key]'";
 	} else {
-		$sql = "INSERT INTO kost VALUES (NULL, '$_POST[id_pemilik]', '$_POST[nama]', '$_POST[alamat]', '$_POST[latitude]', '$_POST[longitude]', '$_POST[tersedia]', '$_POST[status]', '$_POST[fasilitas]', '$_POST[harga_3bulan]', '$_POST[harga_6bulan]', '$_POST[harga_pertahun]')";
+		$sql = "INSERT INTO kost VALUES (NULL, '$_POST[id_pemilik]', '$_POST[nama]', '$_POST[alamat]', '$_POST[latitude]', '$_POST[longitude]', '$_POST[tersedia]', '$_POST[status]', '$_POST[fasilitas]', '$_POST[harga_3bulan]', '$_POST[harga_6bulan]', '$_POST[harga_pertahun]', NULL)";
 	}
   if ($connection->query($sql)) {
     echo alert("Berhasil!", "?page=kost");

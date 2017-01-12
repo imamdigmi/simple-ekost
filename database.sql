@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 09, 2017 at 02:24 AM
+-- Generation Time: Jan 13, 2017 at 01:44 AM
 -- Server version: 5.7.16-0ubuntu0.16.10.1
 -- PHP Version: 7.0.13-0ubuntu0.16.10.1
 
@@ -54,6 +54,13 @@ CREATE TABLE `galeri` (
   `file` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `galeri`
+--
+
+INSERT INTO `galeri` (`id_galeri`, `id_kost`, `judul`, `file`) VALUES
+(1, 9, 'aaa', '1909012017205623.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -72,23 +79,24 @@ CREATE TABLE `kost` (
   `fasilitas` text NOT NULL,
   `harga_3bulan` int(9) NOT NULL,
   `harga_6bulan` int(9) NOT NULL,
-  `harga_pertahun` int(9) NOT NULL
+  `harga_pertahun` int(9) NOT NULL,
+  `pengunjung` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kost`
 --
 
-INSERT INTO `kost` (`id_kost`, `id_pemilik`, `nama`, `alamat`, `latitude`, `longitude`, `tersedia`, `status`, `fasilitas`, `harga_3bulan`, `harga_6bulan`, `harga_pertahun`) VALUES
-(1, 1, 'Kontrakan Sudjiman', 'Karangbendo Kulon, Banguntapan RT.04 RW.08', -7.7903, 110.404, 3, 'Laki-laki', 'Kamar mandi dalam, Kasur, Bantal, Lemari', 50000, 80000, 120000),
-(2, 1, 'Kost Sudjiman', 'Karangbendo Kulon, Banguntapan RT.04 RW.04', -7.78978, 110.405, 12, 'Perempuan', 'Kamar mandi dalam, Kasur, Bantal', 40000, 50000, 1200000),
-(3, 2, 'Kost Mbah Tomo', 'Karangbendo Wetan, Banguntapan RT.02 RW.06', -7.79179, 110.406, 7, 'Laki-laki', 'Kamar mandi dalam, Kasur', 90000, 120000, 1000000),
-(4, 2, 'Kost Garden', 'Karangbendo Kidul, Banguntapan RT.01 RW.06', -7.79245, 110.404, 9, 'Laki-laki', 'Kamar mandi dalam, Bantal', 30000, 120000, 7000000),
-(5, 1, 'Kost Putri Malu', 'Karangbendo Lor, Banguntapan RT.09 RW.08', -7.78901, 110.407, 12, 'Laki-laki', 'Kasur, Bantal', 20000, 80000, 1000000),
-(6, 2, 'Kontrakan Azizah', 'Karangbendo Kulon, Banguntapan RT.04 RW.08', -7.79163, 110.404, 3, 'Perempuan', 'AC, Lemari, Kasur', 60000, 120000, 1000000),
-(7, 2, 'Kost Putra Pleangi', 'Karangbendo Wetan, Banguntapan RT.03 RW.10', -7.79206, 110.404, 5, 'Laki-laki', 'AC, Lemari, Kasur, Kamar mandi dalam', 75000, 800000, 800000),
-(8, 1, 'Kontrakan Indah', 'Karangbendo kidul, Banguntapan RT.14 RW.3', -7.78994, 110.407, 11, 'Perempuan', 'Kamar mandi dalam, Lemari, Kasur, Kipas, Bantal', 120000, 8000000, 90000000),
-(9, 1, 'kost apa', 'Jogja', -7.79404, 110.409, 4, 'Perempuan', 'kamar', 30000, 40000, 12000);
+INSERT INTO `kost` (`id_kost`, `id_pemilik`, `nama`, `alamat`, `latitude`, `longitude`, `tersedia`, `status`, `fasilitas`, `harga_3bulan`, `harga_6bulan`, `harga_pertahun`, `pengunjung`) VALUES
+(1, 1, 'Kontrakan Sudjiman', 'Karangbendo Kulon, Banguntapan RT.04 RW.08', -7.7903, 110.404, 3, 'Laki-laki', 'Kamar mandi dalam, Kasur, Bantal, Lemari', 50000, 80000, 120000, NULL),
+(2, 1, 'Kost Sudjiman', 'Karangbendo Kulon, Banguntapan RT.04 RW.04', -7.78978, 110.405, 12, 'Perempuan', 'Kamar mandi dalam, Kasur, Bantal', 40000, 50000, 1200000, NULL),
+(3, 2, 'Kost Mbah Tomo', 'Karangbendo Wetan, Banguntapan RT.02 RW.06', -7.79179, 110.406, 7, 'Laki-laki', 'Kamar mandi dalam, Kasur', 90000, 120000, 1000000, NULL),
+(4, 2, 'Kost Garden', 'Karangbendo Kidul, Banguntapan RT.01 RW.06', -7.79245, 110.404, 9, 'Laki-laki', 'Kamar mandi dalam, Bantal', 30000, 120000, 7000000, NULL),
+(5, 1, 'Kost Putri Malu', 'Karangbendo Lor, Banguntapan RT.09 RW.08', -7.78901, 110.407, 12, 'Laki-laki', 'Kasur, Bantal', 20000, 80000, 1000000, NULL),
+(6, 2, 'Kontrakan Azizah', 'Karangbendo Kulon, Banguntapan RT.04 RW.08', -7.79163, 110.404, 3, 'Perempuan', 'AC, Lemari, Kasur', 60000, 120000, 1000000, NULL),
+(7, 2, 'Kost Putra Pleangi', 'Karangbendo Wetan, Banguntapan RT.03 RW.10', -7.79206, 110.404, 5, 'Laki-laki', 'AC, Lemari, Kasur, Kamar mandi dalam', 75000, 800000, 800000, NULL),
+(8, 1, 'Kontrakan Indah', 'Karangbendo kidul, Banguntapan RT.14 RW.3', -7.78994, 110.407, 11, 'Perempuan', 'Kamar mandi dalam, Lemari, Kasur, Kipas, Bantal', 120000, 8000000, 90000000, NULL),
+(9, 1, 'kost apa', 'Jogja', -7.79404, 110.409, 4, 'Perempuan', 'kamar', 30000, 40000, 12000, NULL);
 
 -- --------------------------------------------------------
 
@@ -157,7 +165,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `galeri`
 --
 ALTER TABLE `galeri`
-  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `kost`
 --

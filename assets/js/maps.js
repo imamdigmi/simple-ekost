@@ -95,6 +95,10 @@ function initialize() {
 				document.getElementById("longitude2").value = this.getPosition().lng();
 			});
 
+			google.maps.event.addListener(marker, 'click', function(event) {
+				$.post("ajax.php", {"id": id});
+      });
+
 			marker.addListener('click', function() {
 				infoWindow.setContent(infowincontent);
 				infoWindow.open(map, marker);
