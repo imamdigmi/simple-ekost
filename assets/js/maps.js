@@ -4,6 +4,7 @@ function initialize() {
 		zoom: 16
 	});
 	var infoWindow = new google.maps.InfoWindow;
+	
 	// Center area with geolocation detection
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (position) {

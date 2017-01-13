@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-hover">
-				<?php $query = $connection->query("SELECT a.nama, b.nama AS pemilik, a.alamat, a.tersedia, a.status, a.harga_3bulan, a.harga_6bulan, a.harga_pertahun FROM kost a JOIN pemilik b USING(id_pemilik) WHERE id_kost=$_GET[key]"); while ($row = $query->fetch_assoc()): ?>
+				<?php $query = $connection->query("SELECT a.nama, b.nama AS pemilik, a.alamat, a.tersedia, a.status, a.harga_3bulan, a.harga_6bulan, a.harga_pertahun, a.fasilitas, a.pengunjung FROM kost a JOIN pemilik b USING(id_pemilik) WHERE id_kost=$_GET[key]"); while ($row = $query->fetch_assoc()): ?>
 					<tr>
 						<th>Nama Kost</th>
 						<td>: <?=$row["nama"]?></td>
@@ -67,6 +67,14 @@
 					<tr>
 						<th>Harga pertahun</th>
 						<td>: <?=$row["harga_pertahun"]?></td>
+					</tr>
+					<tr>
+						<th>Fasilitas</th>
+						<td>: <?=$row["fasilitas"]?></td>
+					</tr>
+					<tr>
+						<th>Total Pengunjung</th>
+						<td>: <?=$row["pengunjung"]?></td>
 					</tr>
 				<?php endwhile; ?>
 			</table>
