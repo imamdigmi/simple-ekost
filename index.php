@@ -102,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
   <script type="text/javascript">
     var markerImage = 'assets/img/marker.png';
+    var myCurrentLocationMarker = 'assets/img/mylocation-marker.png';
   </script>
   <script src="assets/js/maps.js"></script>
 </body>

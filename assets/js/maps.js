@@ -3,14 +3,35 @@ function initialize() {
 		center: new google.maps.LatLng(-7.792611, 110.408021),
 		zoom: 16
 	});
-	var infoWindow = new google.maps.InfoWindow;
-	
-	// Center area with geolocation detection
+	var infoWindow = new google.maps.InfoWindow({map: map});
+
+	// Try HTML5 geolocation.
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function (position) {
-			initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			map.setCenter(initialLocation);
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			infoWindow.setPosition(pos);
+			infoWindow.setContent("Your location!.");
+			map.setCenter(pos);
+			marker = new google.maps.Marker({
+		    map: map,
+				icon: myCurrentLocationMarker,
+		    animation: google.maps.Animation.DROP,
+		    position: pos
+		  });
+		  marker.addListener('click', toggleBounce);
+			marker.addListener('click', function() {
+				infoWindow.setContent("Your location!.");
+				infoWindow.open(map, marker);
+			});
+		}, function() {
+			handleLocationError(true, infoWindow, map.getCenter());
 		});
+	} else {
+		// Browser doesn't support Geolocation
+		handleLocationError(false, infoWindow, map.getCenter());
 	}
 
 	// Change this depending on the name of your PHP or XML file
@@ -85,6 +106,7 @@ function initialize() {
 				map: map,
 				icon: markerImage,
 				position: point,
+		    animation: google.maps.Animation.DROP,
 				draggable : IsDraggable
 			});
 
@@ -104,6 +126,8 @@ function initialize() {
 				infoWindow.setContent(infowincontent);
 				infoWindow.open(map, marker);
 			});
+
+  		marker.addListener('click', toggleBounce);
 		});
 	});
 }
@@ -127,8 +151,7 @@ function downloadUrl(url, callback) {
 function doNothing() {}
 
 // Read a page's GET URL variables and return them as an associative array.
-function getUrlVars()
-{
+function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
@@ -138,4 +161,19 @@ function getUrlVars()
         vars[hash[0]] = hash[1];
     }
     return vars;
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	infoWindow.setPosition(pos);
+	infoWindow.setContent(browserHasGeolocation ?
+												'Error: The Geolocation service failed.' :
+												'Error: Your browser doesn\'t support geolocation.');
+}
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
 }
