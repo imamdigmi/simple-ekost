@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($query->num_rows) {
             session_start();
             while ($data = $query->fetch_array()) {
-                $_SESSION["username"] = $data["username"];
+                $_SESSION["admin"]["username"] = $data["username"];
               }
             header('location: index.php');
         } else {

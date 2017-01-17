@@ -1,5 +1,5 @@
 <?php require_once("../config.php"); session_start();
-if (empty($_SESSION)) {
+if (!isset($_SESSION["admin"])) {
   header('location: login.php');
 }
 ?>
@@ -10,17 +10,23 @@ if (empty($_SESSION)) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eKost</title>
+  <script type="text/javascript">
+    var IsDraggable = <?=$is=(isset($_GET["page"])) ? (($_GET["page"] == "home") ? "false" : "true") : "false"?>;
+  </script>
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
   <link href="../assets/css/jumbotron.css" rel="stylesheet">
   <script src="../assets/js/ie-emulation-modes-warning.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_2mV5EiGV6fw_mIPg7H885e1eocyaAxc&callback=initMap"></script>
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body onload="baseMap()">
+<body onload="initialize()">
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -53,12 +59,12 @@ if (empty($_SESSION)) {
       <p>&copy; 2016 eKost, Inc.</p>
     </footer>
   </div> <!-- /container -->
-  <script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
   <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
   <script src="../assets/js/maps.js"></script>
   <script type="text/javascript">
-    var markerImage = '../assets/img/marker.png';
+    var markerImage = 'assets/img/marker.png';
+    var myCurrentLocationMarker = 'assets/img/mylocation-marker.png';
   </script>
 </body>
 </html>
