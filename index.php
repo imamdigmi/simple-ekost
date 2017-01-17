@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
                 <input type="password" name="password" class="form-control" placeholder="password">
                 <span class="input-group-btn">
                   <button class="btn btn-success" type="submit">Login</button>
-                  <a href="?page=pemilik" class="btn btn-primary">Register</a>
+                  <a href="?page=pemilik&register" class="btn btn-primary">Register</a>
                 </span>
               </div>
               <input type="hidden" name="login" value="true">
