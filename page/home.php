@@ -48,8 +48,8 @@
 				</thead>
 				<tbody>
 					<?php
-					if ($_SERVER["REQUEST_METHOD"] == "POST") {
-						$query = $connection->query("SELECT * FROM kost WHERE nama LIKE '%$_POST[nama]%' AND (harga_3bulan >= $_POST[min] <= $_POST[max] OR harga_6bulan >= $_POST[min] <= $_POST[max] OR harga_pertahun >= $_POST[min] <= $_POST[max])");
+					if (isset($_GET["searched"])) {
+						$query = $connection->query("SELECT * FROM kost a WHERE nama LIKE '%$_GET[nama]%' AND status='$_GET[status]' AND (a.`harga_pertahun` BETWEEN $_GET[min] AND $_GET[max])");
 					} else {
 						$query = $connection->query("SELECT * FROM kost ORDER BY harga_3bulan, harga_6bulan, harga_pertahun");
 					}
