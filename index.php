@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_POST["login"])) {
   <div class="container">
     <hr>
     <footer>
-      <p>&copy; 2016 eKost, Inc.</p>
+      <p>&copy; 2017 eKost Yogyakarta.</p>
     </footer>
   </div> <!-- /container -->
   <script src="assets/js/bootstrap.min.js"></script>

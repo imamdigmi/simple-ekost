@@ -56,7 +56,7 @@ if (!isset($_SESSION["admin"])) {
   <div class="container">
     <hr>
     <footer>
-      <p>&copy; 2016 eKost, Inc.</p>
+      <p>&copy; 2017 eKost Yogyakarta.</p>
     </footer>
   </div> <!-- /container -->
   <script src="../assets/js/bootstrap.min.js"></script>
