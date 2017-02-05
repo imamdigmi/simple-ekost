@@ -25,6 +25,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 }
 ?>
 <div class="container">
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div class="page-header">
 		<?php if ($update): ?>
 			<h2>Update <small>data pemilik kost!</small></h2>
@@ -75,3 +76,68 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 		</div>
 		<div class="col-md-2"></div>
 </div>
+
+
+
+<script type="text/javascript">
+$(function () {
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Grafik Pengunjung'
+        },
+        subtitle: {
+            text: 'eKost Yogyakarta'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Rata-rata'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Total pengunjung <b>{point.y:.1f}</b>'
+        },
+        series: [{
+            name: 'Population',
+            data: [
+							<?php
+								$data = "";
+								$sql = $connection->query("SELECT * FROM kost WHERE id_pemilik=$_SESSION[id]");
+								while ($row = $sql->fetch_assoc()) {
+									$data .= "['".$row["nama"]."', ".$row["pengunjung"]."],";
+								}
+								echo rtrim($data, ',');
+							?>
+            ],
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // one decimal
+                y: 10, // 10 pixels down from the top
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+    });
+});
+</script>
