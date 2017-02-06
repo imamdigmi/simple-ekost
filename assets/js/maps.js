@@ -5,34 +5,53 @@ function initialize() {
 	});
 	var infoWindow = new google.maps.InfoWindow({map: map});
 
+	var pos = {
+		lat: -7.792611,
+		lng: 110.408021
+	};
+	infoWindow.setPosition(pos);
+	infoWindow.setContent("Your location!.");
+	map.setCenter(pos);
+	marker = new google.maps.Marker({
+		map: map,
+		icon: myCurrentLocationMarker,
+		animation: google.maps.Animation.DROP,
+		position: pos
+	});
+	marker.addListener('click', toggleBounce);
+	marker.addListener('click', function() {
+		infoWindow.setContent("Your location!.");
+		infoWindow.open(map, marker);
+	});
+
 	// Try HTML5 geolocation.
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			};
-			infoWindow.setPosition(pos);
-			infoWindow.setContent("Your location!.");
-			map.setCenter(pos);
-			marker = new google.maps.Marker({
-		    map: map,
-				icon: myCurrentLocationMarker,
-		    animation: google.maps.Animation.DROP,
-		    position: pos
-		  });
-		  marker.addListener('click', toggleBounce);
-			marker.addListener('click', function() {
-				infoWindow.setContent("Your location!.");
-				infoWindow.open(map, marker);
-			});
-		}, function() {
-			handleLocationError(true, infoWindow, map.getCenter());
-		});
-	} else {
+	// if (navigator.geolocation) {
+	// 	navigator.geolocation.getCurrentPosition(function(position) {
+	// 		var pos = {
+	// 			lat: position.coords.latitude,
+	// 			lng: position.coords.longitude
+	// 		};
+	// 		infoWindow.setPosition(pos);
+	// 		infoWindow.setContent("Your location!.");
+	// 		map.setCenter(pos);
+	// 		marker = new google.maps.Marker({
+	// 	    map: map,
+	// 			icon: myCurrentLocationMarker,
+	// 	    animation: google.maps.Animation.DROP,
+	// 	    position: pos
+	// 	  });
+	// 	  marker.addListener('click', toggleBounce);
+	// 		marker.addListener('click', function() {
+	// 			infoWindow.setContent("Your location!.");
+	// 			infoWindow.open(map, marker);
+	// 		});
+	// 	}, function() {
+	// 		handleLocationError(true, infoWindow, map.getCenter());
+	// 	});
+	// } else {
 		// Browser doesn't support Geolocation
-		handleLocationError(false, infoWindow, map.getCenter());
-	}
+	// 	handleLocationError(false, infoWindow, map.getCenter());
+	// }
 
 	// Change this depending on the name of your PHP or XML file
 	var searched = (getUrlVars()["searched"] == "true") ? "true" : "false";
