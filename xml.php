@@ -10,6 +10,8 @@ $parnode = $dom->appendChild($node);
 $sql = "SELECT * FROM kost";
 if ($_GET["searched"] == "true") {
   $sql .= " WHERE status='$_GET[status]' AND nama LIKE '%$_GET[nama]%' AND harga_3bulan >= $_GET[min] AND harga_3bulan <= $_GET[max]";
+} elseif ($_GET["searched"] == "click") {
+  $sql .= " WHERE id_kost=$_GET[key]";
 } elseif ($_GET["searched"] == "false") {
   $sql .= "";
 }

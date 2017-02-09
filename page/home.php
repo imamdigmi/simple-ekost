@@ -49,7 +49,11 @@
 				<tbody>
 					<?php
 					if (isset($_GET["searched"])) {
-						$query = $connection->query("SELECT * FROM kost a WHERE nama LIKE '%$_GET[nama]%' AND status='$_GET[status]' AND (a.`harga_pertahun` BETWEEN $_GET[min] AND $_GET[max])");
+						if ($_GET["searched"] == "click") {
+							$query = $connection->query("SELECT * FROM kost a WHERE id_kost=$_GET[key]");
+						} else {
+							$query = $connection->query("SELECT * FROM kost a WHERE nama LIKE '%$_GET[nama]%' AND status='$_GET[status]' AND (a.`harga_pertahun` BETWEEN $_GET[min] AND $_GET[max])");
+						}
 					} else {
 						$query = $connection->query("SELECT * FROM kost ORDER BY harga_3bulan, harga_6bulan, harga_pertahun");
 					}
@@ -64,6 +68,7 @@
 							<td>Rp.<?=$row["harga_pertahun"]?>,-</td>
 							<td><span class="label label-<?=($row["status"] == "Perempuan") ? "info" : "primary"?>"><?=$row["status"]?></span></td>
 							<td><?=$row["tersedia"]?></td>
+							<td><a href="?searched=click&key=<?=$row["id_kost"]?>" class="btn btn-success btn-xs">Lihat maps</a></td>
 						</tr>
 					<?php endwhile; ?>
 				</tbody>

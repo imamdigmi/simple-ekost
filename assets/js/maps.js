@@ -54,12 +54,16 @@ function initialize() {
 	// }
 
 	// Change this depending on the name of your PHP or XML file
-	var searched = (getUrlVars()["searched"] == "true") ? "true" : "false";
-	var nama = getUrlVars()["nama"];
-	var status = getUrlVars()["status"];
-	var min = getUrlVars()["min"];
-	var max = getUrlVars()["max"];
-	var url = "xml.php?searched="+searched+"&nama="+nama+"&status="+status+"&min="+min+"&max="+max;
+	var searched = (getUrlVars()["searched"] == "true") ? "true" : "click";
+	if (searched == "true") {
+		var nama = getUrlVars()["nama"];
+		var status = getUrlVars()["status"];
+		var min = getUrlVars()["min"];
+		var max = getUrlVars()["max"];
+		var url = "xml.php?searched="+searched+"&nama="+nama+"&status="+status+"&min="+min+"&max="+max;
+	} else {
+		var url = "xml.php?searched=click&key="+getUrlVars()["key"];
+	}
 	downloadUrl(url, function(data) {
 		var xml = data.responseXML;
 		var markers = xml.documentElement.getElementsByTagName('marker');
