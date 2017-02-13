@@ -53,20 +53,20 @@ function initialize() {
 	// 	handleLocationError(false, infoWindow, map.getCenter());
 	// }
 
-	// Change this depending on the name of your PHP or XML file
-	var searched = (getUrlVars()["searched"] == "true") ? "true" : "click";
-	if (searched == "true") {
+	if (getUrlVars()["searched"] == "true") {
 		var nama = getUrlVars()["nama"];
 		var status = getUrlVars()["status"];
 		var min = getUrlVars()["min"];
 		var max = getUrlVars()["max"];
-		var url = "xml.php?searched="+searched+"&nama="+nama+"&status="+status+"&min="+min+"&max="+max;
-	} else {
+		var url = "xml.php?searched=true&nama="+nama+"&status="+status+"&min="+min+"&max="+max;
+	} else if (getUrlVars()["searched"] == "click") {
 		var url = "xml.php?searched=click&key="+getUrlVars()["key"];
+	} else {
+		var url = "xml.php?searched=false";
 	}
 	downloadUrl(url, function(data) {
 		var xml = data.responseXML;
-		var markers = xml.documentElement.getElementsByTagName('marker');
+		var markers = xml.getElementsByTagName('marker');
 		Array.prototype.forEach.call(markers, function(markerElem) {
 		  var id = markerElem.getAttribute("id");
 		  var nama = markerElem.getAttribute("nama");
